@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "YouTubeSatisfactionMeter",
+  "version": "1.0",
+
+  "description": "Visualize your satisfaction after watching YouTube",
+
+  "icons": {
+    "48": "icons/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "YouTubeSatisfactionMeter",
+    "default_popup": "popup/popup.html"
+  },
+
+  "permissions": ["storage", "https://*.youtube.com/*", "tabs"],
+
+  "background": {
+    "scripts": ["extension.js"],
+    "persistent": false
+  }
+}
