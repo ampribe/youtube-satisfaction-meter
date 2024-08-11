@@ -1,12 +1,4 @@
-<div style="display: flex; gap: 10px; ">
-<h1>
-YouTubeSatisfactionMeter
-</h1>
-<img src="YouTubeSatisfactionMeter/icons/icon.png">
-</div>
-
-
-
+# YouTubeSatisfactionMeter
 ## Description
 Do you find better YouTube videos on your subscriptions page or your home page? YouTubeSatisfactionMeter is a Firefox extension that identifies the sources that provide the best YouTube videos.
 
