@@ -5,5 +5,5 @@ Do you find better YouTube videos on your subscriptions page or your home page? 
 The extension was inspired by [this blog post](https://www.george-mack.com/content/i-regret-watching-72-of-youtube-videos). 
 
 ## Screenshots
-![](screenshots/image1.png)
-![](screenshots/image2.png)
+| ![](screenshots/image1.png) | ![](screenshots/image2.png) |
+|---------------------------|---------------------------|
