@@ -3,7 +3,7 @@
   "name": "YouTubeSatisfactionMeter",
   "version": "1.0",
 
-  "description": "Visualize your satisfaction after watching YouTube",
+  "description": "Where do you find the best YouTube videos? Find out with YouTubeSatisfactionMeter.",
 
   "icons": {
     "48": "icons/icon.png"
