@@ -16,13 +16,13 @@ browser.tabs.onUpdated.addListener(
             var prev = "";
             if (prevUrls[tabId] != null) {
                 if (prevUrls[tabId] != tab.url && videoRegex.test(url)) {
-                    var prev = prevUrls[tabId];
+                    prev = prevUrls[tabId];
                 }
             } else if (tab.openerTabId != null && videoRegex.test(url)) {
                 const openerTab = await browser.tabs.get(tab.openerTabId);
-                var prev = openerTab.url;
+                prev = openerTab.url;
             } else if (videoRegex.test(tab.url)) {
-                var prev = changeInfo.url;
+                prev = changeInfo.url;
             }
             setTimeout(async () => {
                 var newTab = await browser.tabs.get(tabId);
@@ -67,7 +67,7 @@ async function handleVideo(prevUrl, videoUrl, title) {
             name: "Channel",
         }
     ];
-    var accessMethod = "link";
+    var accessMethod = "Link";
     categories.forEach((category) => {
         if (category.regex.test(prevUrl)) {
             accessMethod = category.name;

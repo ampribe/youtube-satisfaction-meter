@@ -1,4 +1,40 @@
 /*
+Show/hide rating and metrics sections
+*/
+  
+const ratingSelector = document.getElementById("rating-selector");
+const ratingSectionWrapper = document.getElementById("rating-section-wrapper");
+
+const metricsSelector = document.getElementById("metrics-selector");
+const metricsSectionWrapper = document.getElementById("metrics-section-wrapper");
+
+ratingSelector.addEventListener(
+    "click",
+    () => {
+        if (ratingSectionWrapper.classList.contains("hidden")) {
+            metricsSectionWrapper.classList.add("hidden");
+            updateRateVideoWrapper();
+            ratingSectionWrapper.classList.remove("hidden");
+        } else {
+            ratingSectionWrapper.classList.add("hidden");
+        }
+    }
+)
+
+metricsSelector.addEventListener(
+    "click",
+    () => {
+        if (metricsSectionWrapper.classList.contains("hidden")) {
+            ratingSectionWrapper.classList.add("hidden");
+            updateMetricsSection();
+            metricsSectionWrapper.classList.remove("hidden");            
+        } else {
+            metricsSectionWrapper.classList.add("hidden");
+        }
+    }
+)
+
+/*
 Video and display utils
 */
 async function getVideos() {
@@ -42,7 +78,7 @@ async function updateMetricsSection() {
     const ctx = document.getElementById('metrics-canvas').getContext('2d');
     ctx.width = 400;
     ctx.height = 1000;
-    chart = new Chart(ctx, { type: 'bar' });
+    const chart = new Chart(ctx, { type: 'bar' });
     updateChart(ratedVideos, chart);
     var wrapper = document.createElement("div");
     wrapper.classList.add("video-section-wrapper");
@@ -62,12 +98,13 @@ function constructMetricsVideos(videos, wrapper) {
 
 function constructViewVideoWrapper(video) {
     const c = `view-${video.rating}-rating`;
-    wrapper = document.createElement("div");
+    const wrapper = document.createElement("div");
     wrapper.classList.add("rate-video-wrapper");
+    const map = { regret: "Regret", meh: "Meh", satisfied: "Satisfied"};
     wrapper.innerHTML = `
     ${getVideoHeading(video)}
     <div class="rating-wrapper">
-        <div class="${c}">${video.rating}</div>
+        <div class="${c}">${map[video.rating]}</div>
         <div class="access-type-button">${video.accessMethod}</div>
         <div class="remove-video-wrapper">
             <input type="image" src="../icons/trash.png" video-id="${video.id}"/>
@@ -100,7 +137,7 @@ async function updateRateVideoWrapper() {
 }
 
 function constructRateVideoWrapper(video) {
-    wrapper = document.createElement("div");
+    const wrapper = document.createElement("div");
     wrapper.classList.add("rate-video-wrapper");
     wrapper.innerHTML = `
     ${getVideoHeading(video)}
@@ -185,7 +222,7 @@ function updateChart(videos, chart) {
             },
         ]
     };
-    options = {
+    const options = {
         scale: {
             ticks: {
                 precision:0
@@ -212,38 +249,3 @@ function updateChart(videos, chart) {
     chart.update();
 }
 
-/*
-Show/hide rating and metrics sections
-*/
-  
-ratingSelector = document.getElementById("rating-selector");
-ratingSectionWrapper = document.getElementById("rating-section-wrapper");
-
-metricsSelector = document.getElementById("metrics-selector");
-metricsSectionWrapper = document.getElementById("metrics-section-wrapper");
-
-ratingSelector.addEventListener(
-    "click",
-    () => {
-        if (ratingSectionWrapper.classList.contains("hidden")) {
-            metricsSectionWrapper.classList.add("hidden");
-            updateRateVideoWrapper();
-            ratingSectionWrapper.classList.remove("hidden");
-        } else {
-            ratingSectionWrapper.classList.add("hidden");
-        }
-    }
-)
-
-metricsSelector.addEventListener(
-    "click",
-    () => {
-        if (metricsSectionWrapper.classList.contains("hidden")) {
-            ratingSectionWrapper.classList.add("hidden");
-            updateMetricsSection();
-            metricsSectionWrapper.classList.remove("hidden");            
-        } else {
-            metricsSectionWrapper.classList.add("hidden");
-        }
-    }
-)

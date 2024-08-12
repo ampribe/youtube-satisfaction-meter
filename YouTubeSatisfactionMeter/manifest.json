@@ -17,7 +17,7 @@
   "permissions": ["storage", "https://*.youtube.com/*", "tabs"],
 
   "background": {
-    "scripts": ["extension.js"],
+    "scripts": ["background.js"],
     "persistent": false
   }
 }
