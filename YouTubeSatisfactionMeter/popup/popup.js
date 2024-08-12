@@ -53,6 +53,18 @@ function rateVideo(rating, id) {
       });
 }
 
+function elemFromLiteral(htmlLiteral) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlLiteral, 'text/html');
+    if (doc.body.childNodes.length == 1) {
+      return doc.body.firstChild;
+    }
+    const fragment = document.createDocumentFragment();
+    while (doc.body.firstChild) {
+      fragment.appendChild(doc.body.firstChild);
+    }
+    return fragment;
+}
 function getVideoHeading(video) {
     return `
     <img src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg" title="${video.title}" alt="${video.title}"/>
@@ -101,7 +113,7 @@ function constructViewVideoWrapper(video) {
     const wrapper = document.createElement("div");
     wrapper.classList.add("rate-video-wrapper");
     const map = { regret: "Regret", meh: "Meh", satisfied: "Satisfied"};
-    wrapper.innerHTML = `
+    const literal = `
     ${getVideoHeading(video)}
     <div class="rating-wrapper">
         <div class="${c}">${map[video.rating]}</div>
@@ -110,6 +122,7 @@ function constructViewVideoWrapper(video) {
             <input type="image" src="../icons/trash.png" video-id="${video.id}"/>
         </div>
     </div>`;
+    wrapper.appendChild(elemFromLiteral(literal));
     wrapper.addEventListener('click', event => {
         if (event.target.tagName == "INPUT") {
             let id = event.target.getAttribute("video-id");
@@ -139,7 +152,7 @@ async function updateRateVideoWrapper() {
 function constructRateVideoWrapper(video) {
     const wrapper = document.createElement("div");
     wrapper.classList.add("rate-video-wrapper");
-    wrapper.innerHTML = `
+    const literal = `
     ${getVideoHeading(video)}
     <div class="rating-wrapper">
         <button class="regret-rating" video-id="${video.id}" id="regret-${video.id}">Regret</button>
@@ -150,6 +163,7 @@ function constructRateVideoWrapper(video) {
         </div>
     </div>
     `;
+    wrapper.appendChild(elemFromLiteral(literal));
     wrapper.querySelector(`#regret-${video.id}`).addEventListener("click", (event) => {
         let id = event.target.getAttribute("video-id");
         rateVideo("regret", id)
